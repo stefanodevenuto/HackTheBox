@@ -1,0 +1,10 @@
+# Nmap 7.92 scan initiated Wed Mar 29 11:08:18 2023 as: nmap -p- -oN nmap/fullscan 10.10.11.201
+Nmap scan report for bagel.htb (10.10.11.201)
+Host is up (0.060s latency).
+Not shown: 65532 closed tcp ports (conn-refused)
+PORT     STATE SERVICE
+22/tcp   open  ssh
+5000/tcp open  upnp
+8000/tcp open  http-alt
+
+# Nmap done at Wed Mar 29 11:08:36 2023 -- 1 IP address (1 host up) scanned in 18.01 seconds
