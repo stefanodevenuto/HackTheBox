@@ -1,0 +1,17 @@
+# Nmap 7.92 scan initiated Thu Apr 20 09:15:41 2023 as: nmap -sC -sV -oN nmap/initial 10.10.11.197
+Nmap scan report for eforenzics.htb (10.10.11.197)
+Host is up (0.062s latency).
+Not shown: 998 closed tcp ports (conn-refused)
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 8.2p1 Ubuntu 4ubuntu0.5 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   3072 2f:1e:63:06:aa:6e:bb:cc:0d:19:d4:15:26:74:c6:d9 (RSA)
+|   256 27:45:20:ad:d2:fa:a7:3a:83:73:d9:7c:79:ab:f3:0b (ECDSA)
+|_  256 42:45:eb:91:6e:21:02:06:17:b2:74:8b:c5:83:4f:e0 (ED25519)
+80/tcp open  http    Apache httpd 2.4.41
+|_http-title: eForenzics - Premier Digital Forensics
+|_http-server-header: Apache/2.4.41 (Ubuntu)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Thu Apr 20 09:16:01 2023 -- 1 IP address (1 host up) scanned in 20.08 seconds
