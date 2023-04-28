@@ -1,0 +1,10 @@
+# Nmap 7.92 scan initiated Tue Apr  4 11:33:07 2023 as: nmap -p- -oN nmap/initial 10.10.11.206
+Nmap scan report for qreader.htb (10.10.11.206)
+Host is up (0.047s latency).
+Not shown: 65532 closed tcp ports (conn-refused)
+PORT     STATE SERVICE
+22/tcp   open  ssh
+80/tcp   open  http
+5789/tcp open  unknown
+
+# Nmap done at Tue Apr  4 11:33:33 2023 -- 1 IP address (1 host up) scanned in 26.65 seconds
